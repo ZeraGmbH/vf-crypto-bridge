@@ -22,16 +22,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-# Link to libcrypto using pkg-config:
+HEADERS += vf-crypto-bridge_global.h
+
 CONFIG += link_pkgconfig
-PKGCONFIG += libcrypto
 
-SOURCES += \
-    signaturehandler.cpp
+isEmpty(VF_NO_OPENSSL) {
+# Link to libcrypto using pkg-config:
+  PKGCONFIG += libcrypto
 
-HEADERS += \
-        vf-crypto-bridge_global.h \
-    signaturehandler.h
+  HEADERS += opensslsignaturehandler.h
+  SOURCES += opensslsignaturehandler.cpp
+}
 
 public_headers.files = $$HEADERS
 

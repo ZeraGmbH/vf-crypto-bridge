@@ -1,4 +1,4 @@
-#include "signaturehandler.h"
+#include "opensslsignaturehandler.h"
 
 #include <QFile>
 #include <QDebug>
@@ -16,11 +16,11 @@ namespace VeinCrypto
     return s_pwCallbackImpl(out_buf, t_size, t_rwFlag, t_userData);
   }
 
-  SignatureHandler::SignatureHandler()
+  OpenSSLSignatureHandler::OpenSSLSignatureHandler()
   {
   }
 
-  QByteArray SignatureHandler::createCMSSignature(QByteArray t_caCertData, QByteArray t_privKeyData, QByteArray t_payloadData, QByteArray t_privKeyPassword, bool *out_signingSuccess)
+  QByteArray OpenSSLSignatureHandler::createCMSSignature(QByteArray t_caCertData, QByteArray t_privKeyData, QByteArray t_payloadData, QByteArray t_privKeyPassword, bool *out_signingSuccess)
   {
     //never use unencrypted private keys!!
     Q_ASSERT(t_privKeyPassword.isEmpty() == false);
@@ -67,6 +67,8 @@ namespace VeinCrypto
       };
       //capturing lambdas cannot be used as raw function pointers, so use an intermediary function that calls the static std::function that holds the lambda set previously
       privKey = PEM_read_bio_PrivateKey(privKeyBIO, nullptr, &pwCallback, nullptr);
+      //unset callback
+      s_pwCallbackImpl = nullptr;
 
       if(caCert && privKey)
       {
@@ -148,7 +150,7 @@ namespace VeinCrypto
     return retVal;
   }
 
-  QByteArray SignatureHandler::verifyCMSSignature(QByteArray t_caCertData, QByteArray t_signedData, bool *out_verificationSuccess)
+  QByteArray OpenSSLSignatureHandler::verifyCMSSignature(QByteArray t_caCertData, QByteArray t_signedData, bool *out_verificationSuccess)
   {
     QByteArray retVal = QByteArray();
     bool successFlag = false;

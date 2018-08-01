@@ -1,16 +1,16 @@
-#ifndef VEINCRYPTO_SIGNATUREHANDLERR_H
-#define VEINCRYPTO_SIGNATUREHANDLERR_H
+#ifndef VEINCRYPTO_OPENSSLSIGNATUREHANDLERR_H
+#define VEINCRYPTO_OPENSSLSIGNATUREHANDLERR_H
 
 #include "vf-crypto-bridge_global.h"
 #include <QByteArray>
 
 namespace VeinCrypto
 {
-  class VFCRYPTOBRIDGESHARED_EXPORT SignatureHandler
+  class VFCRYPTOBRIDGESHARED_EXPORT OpenSSLSignatureHandler
   {
 
   public:
-    SignatureHandler();
+    OpenSSLSignatureHandler();
 
     /**
      * @brief createCMSSignature
@@ -33,4 +33,4 @@ namespace VeinCrypto
     static QByteArray verifyCMSSignature(QByteArray t_caCertData, QByteArray t_signedData, bool *out_verificationSuccess=nullptr);
   };
 } // namespace VeinCrypto
-#endif // VEINCRYPTO_SIGNATUREHANDLERR_H
+#endif // VEINCRYPTO_OPENSSLSIGNATUREHANDLERR_H

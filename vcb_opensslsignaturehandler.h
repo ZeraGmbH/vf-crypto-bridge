@@ -4,7 +4,7 @@
 #include "vf-crypto-bridge_global.h"
 #include <QByteArray>
 
-namespace VeinCrypto
+namespace VeinCryptoBridge
 {
   class VFCRYPTOBRIDGESHARED_EXPORT OpenSSLSignatureHandler
   {

@@ -1,13 +1,14 @@
 #include "vcb_opensslsignaturehandler.h"
 
-#include <QFile>
 #include <QDebug>
+
+#include <functional>
 
 #include <openssl/pem.h>
 #include <openssl/cms.h>
 #include <openssl/err.h>
 
-namespace VeinCrypto
+namespace VeinCryptoBridge
 {
   static std::function<int(char*,int,int,void*)> s_pwCallbackImpl;
 

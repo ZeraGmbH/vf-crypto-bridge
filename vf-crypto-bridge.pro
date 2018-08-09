@@ -39,3 +39,8 @@ public_headers.files = $$HEADERS
 exists( ../../vein-framework.pri ) {
   include(../../vein-framework.pri)
 }
+
+unix {
+    target.path = /usr/lib
+    INSTALLS += target
+}

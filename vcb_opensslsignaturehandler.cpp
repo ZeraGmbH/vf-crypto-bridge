@@ -1,4 +1,4 @@
-#include "opensslsignaturehandler.h"
+#include "vcb_opensslsignaturehandler.h"
 
 #include <QFile>
 #include <QDebug>
@@ -25,7 +25,7 @@ namespace VeinCrypto
     //never use unencrypted private keys!!
     Q_ASSERT(t_privKeyPassword.isEmpty() == false);
 
-    QByteArray retVal = QByteArray();
+    QByteArray retVal;
     bool successFlag = false;
 
     BIO *inBIO = nullptr, *outBIO = nullptr, *certBIO = nullptr, *privKeyBIO = nullptr;
@@ -65,7 +65,7 @@ namespace VeinCrypto
 
         return dataSize;
       };
-      //capturing lambdas cannot be used as raw function pointers, so use an intermediary function that calls the static std::function that holds the lambda set previously
+      //capturing lambdas cannot be used as raw function pointers, so use an intermediate function that calls the static std::function that holds the lambda set previously
       privKey = PEM_read_bio_PrivateKey(privKeyBIO, nullptr, &pwCallback, nullptr);
       //unset callback
       s_pwCallbackImpl = nullptr;
@@ -124,7 +124,6 @@ namespace VeinCrypto
       X509_free(caCert);
     if(privKey)
       EVP_PKEY_free(privKey);
-
     if(inBIO)
       BIO_free(inBIO);
     if(outBIO)
@@ -152,7 +151,7 @@ namespace VeinCrypto
 
   QByteArray OpenSSLSignatureHandler::verifyCMSSignature(QByteArray t_caCertData, QByteArray t_signedData, bool *out_verificationSuccess)
   {
-    QByteArray retVal = QByteArray();
+    QByteArray retVal;
     bool successFlag = false;
 
     BIO *inBIO = nullptr, *outBIO = nullptr, *certBIO = nullptr, *contentBIO = nullptr;

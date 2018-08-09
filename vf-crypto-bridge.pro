@@ -30,8 +30,8 @@ isEmpty(VF_NO_OPENSSL) {
 # Link to libcrypto using pkg-config:
   PKGCONFIG += libcrypto
 
-  HEADERS += opensslsignaturehandler.h
-  SOURCES += opensslsignaturehandler.cpp
+  HEADERS += vcb_opensslsignaturehandler.h
+  SOURCES += vcb_opensslsignaturehandler.cpp
 }
 
 public_headers.files = $$HEADERS

@@ -19,6 +19,14 @@ namespace VeinCryptoBridge
 
   OpenSSLSignatureHandler::OpenSSLSignatureHandler()
   {
+    OpenSSL_add_all_algorithms();
+    ERR_load_crypto_strings();
+  }
+
+  OpenSSLSignatureHandler::~OpenSSLSignatureHandler()
+  {
+    CRYPTO_cleanup_all_ex_data();
+    ERR_free_strings();
   }
 
   QByteArray OpenSSLSignatureHandler::createCMSSignature(QByteArray t_caCertData, QByteArray t_privKeyData, QByteArray t_payloadData, QByteArray t_privKeyPassword, bool *out_signingSuccess)
@@ -41,8 +49,7 @@ namespace VeinCryptoBridge
      */
     int flags = CMS_DETACHED | CMS_STREAM;
 
-    OpenSSL_add_all_algorithms();
-    ERR_load_crypto_strings();
+
 
     // Read in signer certificate and private key
     certBIO = BIO_new_mem_buf(t_caCertData.data(), t_caCertData.size());
@@ -134,14 +141,6 @@ namespace VeinCryptoBridge
     if(privKeyBIO)
       BIO_free(privKeyBIO);
 
-    //do not cleanup here since this can lead to undefined behavior / errors if something else uses libcrypto in the same application
-    //it is the applications duty to do the cleanup
-    /*
-     //EVP_cleanup(); //deprecated
-     CRYPTO_cleanup_all_ex_data();
-     ERR_free_strings();
-     */
-
     if(out_signingSuccess)
     {
       *out_signingSuccess = successFlag;
@@ -159,9 +158,6 @@ namespace VeinCryptoBridge
     X509_STORE *certStore = nullptr;
     X509 *caCert = nullptr;
     CMS_ContentInfo *cmsInfo = nullptr;
-
-    OpenSSL_add_all_algorithms();
-    ERR_load_crypto_strings();
 
     //set up CA certificate store
     certStore = X509_STORE_new();
@@ -231,14 +227,6 @@ namespace VeinCryptoBridge
       BIO_free(certBIO);
     if(contentBIO)
       BIO_free(contentBIO);
-
-    //do not cleanup here since this can lead to undefined behavior / errors if something else uses libcrypto in the same application
-    //it is the applications duty to do the cleanup
-    /*
-     //EVP_cleanup(); //deprecated
-     CRYPTO_cleanup_all_ex_data();
-     ERR_free_strings();
-     */
 
     if(out_verificationSuccess)
     {

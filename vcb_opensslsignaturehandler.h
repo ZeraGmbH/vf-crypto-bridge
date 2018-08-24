@@ -11,6 +11,7 @@ namespace VeinCryptoBridge
 
   public:
     OpenSSLSignatureHandler();
+    ~OpenSSLSignatureHandler();
 
     /**
      * @brief createCMSSignature
@@ -21,7 +22,7 @@ namespace VeinCryptoBridge
      * @param out_signingSuccess success indicator
      * @return data with signature header/footer or QByteArray() on failure
      */
-    static QByteArray createCMSSignature(QByteArray t_caCertData, QByteArray t_privKeyData, QByteArray t_payloadData, QByteArray t_privKeyPassword, bool *out_signingSuccess=nullptr);
+    QByteArray createCMSSignature(QByteArray t_caCertData, QByteArray t_privKeyData, QByteArray t_payloadData, QByteArray t_privKeyPassword, bool *out_signingSuccess=nullptr);
 
     /**
      * @brief verifyCMSSignature
@@ -30,7 +31,7 @@ namespace VeinCryptoBridge
      * @param out_verificationSuccess success indicator
      * @return data stripped by the signature header/footer or QByteArray() on failure
      */
-    static QByteArray verifyCMSSignature(QByteArray t_caCertData, QByteArray t_signedData, bool *out_verificationSuccess=nullptr);
+    QByteArray verifyCMSSignature(QByteArray t_caCertData, QByteArray t_signedData, bool *out_verificationSuccess=nullptr);
   };
 } // namespace VeinCrypto
 #endif // VEINCRYPTO_OPENSSLSIGNATUREHANDLERR_H

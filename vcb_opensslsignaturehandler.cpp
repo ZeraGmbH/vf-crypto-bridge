@@ -113,7 +113,6 @@ namespace VeinCryptoBridge
               {
                 char *outData=nullptr;
                 qint64 outSize=0;
-                qDebug() << "Signing successful";
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wold-style-cast" //it's C code, they don't have static_cast
@@ -200,7 +199,6 @@ namespace VeinCryptoBridge
                 {
                   char *outData=nullptr;
                   qint64 outSize=0;
-                  qDebug()<<"Verification Successful";
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wold-style-cast" //it's C code, they don't have static_cast

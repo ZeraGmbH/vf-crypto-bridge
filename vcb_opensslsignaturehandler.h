@@ -1,12 +1,12 @@
 #ifndef VEINCRYPTO_OPENSSLSIGNATUREHANDLERR_H
 #define VEINCRYPTO_OPENSSLSIGNATUREHANDLERR_H
 
-#include "vf-crypto-bridge_global.h"
+#include "vfcryptobridge_export.h"
 #include <QByteArray>
 
 namespace VeinCryptoBridge
 {
-  class VFCRYPTOBRIDGESHARED_EXPORT OpenSSLSignatureHandler
+  class VFCRYPTOBRIDGE_EXPORT OpenSSLSignatureHandler
   {
 
   public:

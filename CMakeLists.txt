@@ -19,7 +19,7 @@ set(VfCryptoBridge_VERSION_PATCH "1")
 set(PROJECT_VERSION "${VfCryptoBridge_VERSION_MAJOR}.${VfCryptoBridge_VERSION_MINOR}.${VfCryptoBridge_VERSION_PATCH}")
 
 
-option(useOpenSsl "Using libsystemd" ON)
+option(useOpenSsl "Using OpenSSL" ON)
 
 
 #Adding cmake functions like feature_summary()

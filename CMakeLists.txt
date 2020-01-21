@@ -28,7 +28,7 @@ include(GNUInstallDirs)
 
 #Find dependecies
 find_package(Qt5 COMPONENTS Core CONFIG REQUIRED)
-if(${useOpenSsl})
+if(useOpenSsl)
 	find_package(OpenSSL COMPONENTS SSL Crypto REQUIRED)
 endif()
 #sum up project Files
@@ -57,9 +57,9 @@ target_link_libraries(VfCryptoBridge
     Qt5::Core
     )
 
-if(${openSSL_FOUND})
+if(${OpenSSL_FOUND})
     target_link_libraries(VfCryptoBridge 
-        PRIVATE
+        PUBLIC
         OpenSSL::SSL
         OpenSSL::Crypto
     )

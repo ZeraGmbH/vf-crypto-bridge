@@ -6,6 +6,9 @@ include(CMakeFindDependencyMacro)
 # dependencies
 find_dependency(Qt5 COMPONENTS Core Quick REQUIRED)
 find_dependency(PkgConfig)
+if(@useOpenSsl@)
+    find_dependency(OpenSSL COMPONENTS SSL Crypto REQUIRED)
+endif()
 
 # cmark pkg-config??
 
